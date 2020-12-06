@@ -45,9 +45,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Core/AAEngine/include/;$(SolutionDir)Randomization/rand/</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Core/AAEngine/include/;$(SolutionDir)Randomization/rand/</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -87,6 +89,14 @@
     <ClInclude Include="include\Levels.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\SplitAstroid.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\AAEngine\AAEngine.vcxproj">
+      <Project>{091bacde-fe9f-44da-a52d-8ab3b026a626}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Randomization\rand\rand.vcxproj">
+      <Project>{32a240bc-514f-4bfa-a205-1766769e9d87}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

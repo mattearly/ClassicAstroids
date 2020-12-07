@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/glm.hpp>
-#include "../../rand/rand/rand.h"
+#include <rand.h>
 
 struct Astroid
 {
@@ -22,7 +22,7 @@ Astroid createAstroid(int obj_id, int inst_id, bool fragment)
 {
 	float rand_speed = NTKR(1.f, 5.f);
 
-	glm::vec2 rand_direction;
+	glm::vec2 rand_direction{};
 	rand_direction.x = NTKR(-1.f, 1.f);
 	rand_direction.y = NTKR(-1.f, 1.f);
 

@@ -26,17 +26,17 @@ int main()
 	// INIT SOUND
 	AA::SoundDevice::Init();
 	// LOAD SOUND EFFECTS
-	static uint32_t sound_zap = ShortSound::AddShortSound("../assets/sounds/zap15.ogg");
+	static uint32_t sound_zap = ShortSound::AddShortSound("res/sounds/zap15.ogg");
 	static ShortSound zap_source;
 	//zap_source.SetVolume(1.1f);
-	static uint32_t sound_hit_ast = ShortSound::AddShortSound("../assets/sounds/shot2.ogg");
+	static uint32_t sound_hit_ast = ShortSound::AddShortSound("res/sounds/shot2.ogg");
 	static AA::ShortSound astroid_hit_source;
 	//astroid_hit_source.SetVolume(1.8f);
 	astroid_hit_source.SetRelative(1);
 	SoundListener::Get()->SetDistanceModel(AL_NONE);
 
 	// LOAD MUSIC
-	static AA::LongSound music_source("../assets/sounds/music/Interplanetary Alignment - NoMBe (stereo).ogg");
+	static AA::LongSound music_source("res/sounds/music/Interplanetary Alignment - NoMBe (stereo).ogg");
 	music_source.SetVolume(.1f);
 
 	auto startupSettings = []()
@@ -50,9 +50,9 @@ int main()
 	};
 	LOOP->addToSlowUpdate(updateMusic);
 
-	static int unlit_shader = LOOP->addShader("../assets/shaders/noLight.vert", "../assets/shaders/noLight.frag");
+	static int unlit_shader = LOOP->addShader("res/shaders/noLight.vert", "res/shaders/noLight.frag");
 
-	static int lit_shader = LOOP->addShader("../assets/shaders/combinedLight.vert", "../assets/shaders/combinedLight.frag");
+	static int lit_shader = LOOP->addShader("res/shaders/combinedLight.vert", "res/shaders/combinedLight.frag");
 	// directional light for lit shader
 	static AA::DirectionalLight directional_light{};
 	directional_light.Direction = glm::vec3(-0.45f, -1.f, 0.f);
@@ -62,29 +62,29 @@ int main()
 	setDirectionalLight(directional_light, LOOP->getShader(lit_shader));
 
 	// BACKDROP
-	static int starplane_object = LOOP->addObject("../assets/models/obj/starplane.obj", cam_1, lit_shader);
+	static int starplane_object = LOOP->addObject("res/models/starplane.obj", cam_1, lit_shader);
 	LOOP->getGameObject(starplane_object).translateTo(glm::vec3(0, -99, 0));
 	LOOP->getGameObject(starplane_object).scaleTo(glm::vec3(10, 1, 10));
 
 	// PLAYER SHIP
-	static int player_ship_object = LOOP->addObject("../assets/models/obj/flyingV.obj", cam_1, unlit_shader);
+	static int player_ship_object = LOOP->addObject("res/models/flyingV.obj", cam_1, unlit_shader);
 	LOOP->getGameObject(player_ship_object).translateTo(glm::vec3(0, -20, 0));
 	LOOP->getGameObject(player_ship_object).scaleTo(glm::vec3(.6667f));
 	LOOP->getGameObject(player_ship_object).rotateTo(glm::vec3(0, glm::radians(180.f), 0));
 
 	// LAZER BULLET
-	static int bullet_object = LOOP->addObject("../assets/models/obj/lazer.obj", cam_1, unlit_shader);
+	static int bullet_object = LOOP->addObject("res/models/lazer.obj", cam_1, unlit_shader);
 	LOOP->getGameObject(bullet_object).translateTo(LOOP->getGameObject(player_ship_object).getLocation());
 	LOOP->getGameObject(bullet_object).scaleTo(glm::vec3(.3333f));
 	LOOP->getGameObject(bullet_object).rotateTo(glm::vec3(0, glm::radians(180.f), 0));
 	LOOP->getGameObject(bullet_object).setColliderSphere(LOOP->getGameObject(player_ship_object).getLocation(), .02f);
 
 	// ASTROIDS
-	static int go_asteroid = LOOP->addObject("../assets/models/obj/asteroid.obj", cam_1, unlit_shader);
+	static int go_asteroid = LOOP->addObject("res/models/asteroid.obj", cam_1, unlit_shader);
 	LOOP->getGameObject(go_asteroid).translateTo(glm::vec3(0, -20, -5));
 	LOOP->getGameObject(go_asteroid).setColliderSphere(glm::vec3(0, -20, -5), 1.f);
 
-	static int go_asteroid2 = LOOP->addObject("../assets/models/obj/asteroid2.obj", cam_1, unlit_shader);
+	static int go_asteroid2 = LOOP->addObject("res/models/asteroid2.obj", cam_1, unlit_shader);
 	LOOP->getGameObject(go_asteroid2).translateTo(glm::vec3(-7, -20, -7));
 	LOOP->getGameObject(go_asteroid2).setColliderSphere(glm::vec3(-7, -20, -7), 1.f);
 

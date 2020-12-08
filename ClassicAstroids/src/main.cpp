@@ -28,7 +28,7 @@ int main()
 	// LOAD SOUND EFFECTS
 	static uint32_t sound_zap = ShortSound::AddShortSound("res/sounds/zap15.ogg");
 	static ShortSound zap_source;
-	//zap_source.SetVolume(1.1f);
+	zap_source.SetVolume(0.4f);
 	static uint32_t sound_hit_ast = ShortSound::AddShortSound("res/sounds/shot2.ogg");
 	static AA::ShortSound astroid_hit_source;
 	//astroid_hit_source.SetVolume(1.8f);
@@ -207,7 +207,7 @@ int main()
 			//glm::vec3 dir = LOOP->getGameObject(player_ship_object).getRotation();
 			//xShipDir = sin(dir.y);
 			//zShipDir = cos(dir.y);
-			SoundListener::Get()->SetOrientation(glm::vec3(xShipDir, 0, zShipDir),	glm::vec3(0, 1, 0));
+			SoundListener::Get()->SetOrientation(glm::vec3(xShipDir, 0, zShipDir), glm::vec3(0, 1, 0));
 
 			if (!bulletOut)
 			{

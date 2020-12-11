@@ -45,7 +45,7 @@ void destroyAstroid(Astroid& a, std::vector<Astroid>& astroids)
 
 	astroids.erase(astroids.begin() + isIt);
 
-	LOOP->getGameObject(obj_id).removeInstance(inst_id);
+	AA::LOOP->getGameObject(obj_id).removeInstance(inst_id);
 
 	syncAstroids(obj_id, inst_id, astroids);
 }

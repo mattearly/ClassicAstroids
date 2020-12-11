@@ -50,9 +50,9 @@ int main()
 	};
 	LOOP->addToSlowUpdate(updateMusic);
 
-	static int unlit_shader = LOOP->addShader("res/shaders/noLight.vert", "res/shaders/noLight.frag");
+	static int unlit_shader = LOOP->addShader(SHADERTYPE::DIFF);
 
-	static int lit_shader = LOOP->addShader("res/shaders/combinedLight.vert", "res/shaders/combinedLight.frag");
+	static int lit_shader = LOOP->addShader(SHADERTYPE::LITDIFF);
 	// directional light for lit shader
 	static AA::DirectionalLight directional_light{};
 	directional_light.Direction = glm::vec3(-0.45f, -1.f, 0.f);
@@ -63,29 +63,29 @@ int main()
 
 	// BACKDROP
 	static int starplane_object = LOOP->addObject("res/models/starplane.obj", cam_1, lit_shader);
-	LOOP->getGameObject(starplane_object).translateTo(glm::vec3(0, -99, 0));
-	LOOP->getGameObject(starplane_object).scaleTo(glm::vec3(10, 1, 10));
+	LOOP->getGameObject(starplane_object).setTranslation(glm::vec3(0, -99, 0));
+	LOOP->getGameObject(starplane_object).setScale(glm::vec3(10, 1, 10));
 
 	// PLAYER SHIP
 	static int player_ship_object = LOOP->addObject("res/models/flyingV.obj", cam_1, unlit_shader);
-	LOOP->getGameObject(player_ship_object).translateTo(glm::vec3(0, -20, 0));
-	LOOP->getGameObject(player_ship_object).scaleTo(glm::vec3(.6667f));
-	LOOP->getGameObject(player_ship_object).rotateTo(glm::vec3(0, glm::radians(180.f), 0));
+	LOOP->getGameObject(player_ship_object).setTranslation(glm::vec3(0, -20, 0));
+	LOOP->getGameObject(player_ship_object).setScale(glm::vec3(.6667f));
+	LOOP->getGameObject(player_ship_object).setRotation(glm::vec3(0, glm::radians(180.f), 0));
 
 	// LAZER BULLET
 	static int bullet_object = LOOP->addObject("res/models/lazer.obj", cam_1, unlit_shader);
-	LOOP->getGameObject(bullet_object).translateTo(LOOP->getGameObject(player_ship_object).getLocation());
-	LOOP->getGameObject(bullet_object).scaleTo(glm::vec3(.3333f));
-	LOOP->getGameObject(bullet_object).rotateTo(glm::vec3(0, glm::radians(180.f), 0));
+	LOOP->getGameObject(bullet_object).setTranslation(LOOP->getGameObject(player_ship_object).getLocation());
+	LOOP->getGameObject(bullet_object).setScale(glm::vec3(.3333f));
+	LOOP->getGameObject(bullet_object).setRotation(glm::vec3(0, glm::radians(180.f), 0));
 	LOOP->getGameObject(bullet_object).setColliderSphere(LOOP->getGameObject(player_ship_object).getLocation(), .02f);
 
 	// ASTROIDS
 	static int go_asteroid = LOOP->addObject("res/models/asteroid.obj", cam_1, unlit_shader);
-	LOOP->getGameObject(go_asteroid).translateTo(glm::vec3(0, -20, -5));
+	LOOP->getGameObject(go_asteroid).setTranslation(glm::vec3(0, -20, -5));
 	LOOP->getGameObject(go_asteroid).setColliderSphere(glm::vec3(0, -20, -5), 1.f);
 
 	static int go_asteroid2 = LOOP->addObject("res/models/asteroid2.obj", cam_1, unlit_shader);
-	LOOP->getGameObject(go_asteroid2).translateTo(glm::vec3(-7, -20, -7));
+	LOOP->getGameObject(go_asteroid2).setTranslation(glm::vec3(-7, -20, -7));
 	LOOP->getGameObject(go_asteroid2).setColliderSphere(glm::vec3(-7, -20, -7), 1.f);
 
 	static std::vector<Astroid> astroids;
@@ -159,8 +159,8 @@ int main()
 		// reset variables
 		bulletOut = false; bulletHitSomething = false;
 		// reset location
-		LOOP->getGameObject(bullet_object).translateTo(LOOP->getGameObject(player_ship_object).getLocation());
-		LOOP->getGameObject(bullet_object).rotateTo(LOOP->getGameObject(player_ship_object).getRotation());
+		LOOP->getGameObject(bullet_object).setTranslation(LOOP->getGameObject(player_ship_object).getLocation());
+		LOOP->getGameObject(bullet_object).setRotation(LOOP->getGameObject(player_ship_object).getRotation());
 	};
 
 	auto controlShip = [](float dt) {
@@ -186,12 +186,12 @@ int main()
 				LOOP->getGameObject(player_ship_object).advanceTranslate(glm::vec3(0, 0, BOUNDRYSIZE * 2));
 
 			// set listener location for positional sound calc
-			SoundListener::Get()->SetPosition(LOOP->getGameObject(player_ship_object).getLocation());
+			SoundListener::Get()->SetLocation(LOOP->getGameObject(player_ship_object).getLocation());
 
 			if (!bulletOut)
 			{
 				//apply loc to bullet if it is not out
-				LOOP->getGameObject(bullet_object).translateTo(LOOP->getGameObject(player_ship_object).getLocation());
+				LOOP->getGameObject(bullet_object).setTranslation(LOOP->getGameObject(player_ship_object).getLocation());
 			}
 		}
 
@@ -212,7 +212,7 @@ int main()
 			if (!bulletOut)
 			{
 				//apply rotation to bullet if it is not out
-				LOOP->getGameObject(bullet_object).rotateTo(LOOP->getGameObject(player_ship_object).getRotation());
+				LOOP->getGameObject(bullet_object).setRotation(LOOP->getGameObject(player_ship_object).getRotation());
 			}
 		}
 
@@ -231,7 +231,7 @@ int main()
 			if (!bulletOut)
 			{
 				//apply rotation to bullet if it is not out
-				LOOP->getGameObject(bullet_object).rotateTo(LOOP->getGameObject(player_ship_object).getRotation());
+				LOOP->getGameObject(bullet_object).setRotation(LOOP->getGameObject(player_ship_object).getRotation());
 			}
 		}
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "../../AAEngine/include/GameObject.h"
+#include "../../AAEngine/include/Scene/GameObject.h"
 #include "../../AAEngine/include/Loop.h"
 #include "Astroid.h"
 

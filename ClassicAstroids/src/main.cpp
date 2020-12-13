@@ -4,13 +4,13 @@
 #include "../include/SplitAstroid.h"
 #include "../include/Levels.h"
 #include "../include/Player.h"
-#include "../../AAEngine/include/Lights.h"
+#include "../../AAEngine/include/Scene/Lights.h"
 #include "../../AAEngine/include/Loop.h"
 #include "../../AAEngine/include/Sound/SoundDevice.h"
 #include "../../AAEngine/include/Sound/LongSound.h"
 #include "../../AAEngine/include/Sound/ShortSound.h"
 #include "../../AAEngine/include/Sound/SoundListener.h"
-#include "../../AAEngine/include/CollisionHandler.h"
+#include "../../AAEngine/include/Scene/CollisionHandler.h"
 #include <glm/glm.hpp>
 
 using namespace AA;
